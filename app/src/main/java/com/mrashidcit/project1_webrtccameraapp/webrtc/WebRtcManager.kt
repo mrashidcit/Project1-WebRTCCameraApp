@@ -153,11 +153,11 @@ class WebRtcManager(private val appContext: Context) {
         videoCapturer?.switchCamera(
             object: CameraVideoCapturer.CameraSwitchHandler {
                 override fun onCameraSwitchDone(p0: Boolean) {
-                    TODO("Not yet implemented")
+                    Unit
                 }
 
                 override fun onCameraSwitchError(p0: String?) {
-                    TODO("Not yet implemented")
+                    Unit
                 }
 
             },

@@ -23,6 +23,8 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Tab
@@ -39,6 +41,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
@@ -46,6 +49,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.mrashidcit.project1_webrtccameraapp.R
 import org.webrtc.RendererCommon
 import org.webrtc.SurfaceViewRenderer
 
@@ -230,6 +234,24 @@ private fun ColumnScope.CameraPipelineContent(
                     .weight(1f, fill = false)
             ) {
                 CameraSurfaceRenderer(viewModel = viewModel)
+
+                IconButton(
+                    onClick = {
+                        viewModel.switchCamera()
+                    },
+                    modifier = Modifier
+                        .padding(
+                            horizontal = 4.dp,
+                            vertical = 4.dp
+                        )
+                        .align(Alignment.TopStart)
+                ) {
+                    Icon(
+                        painter = painterResource(R.drawable.outline_cameraswitch_24),
+                        contentDescription = null,
+                    )
+                }
+
             }
             Spacer(modifier = Modifier.height(16.dp))
             Button(

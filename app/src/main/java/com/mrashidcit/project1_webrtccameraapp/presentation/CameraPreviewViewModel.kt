@@ -96,6 +96,10 @@ class CameraPreviewViewModel(
         webRtcManager.videoTrack?.removeSink(sink)
     }
 
+    fun switchCamera() {
+        webRtcManager.switchCamera()
+    }
+
     /**
      * Called by the framework when this ViewModel (and the screen that owns
      * it) is gone for good. This is the single place the whole WebRTC
