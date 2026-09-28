@@ -33,6 +33,14 @@ android {
     buildFeatures {
         compose = true
     }
+    packaging {
+        // The WebRTC AAR ships native .so libraries and some META-INF
+        // metadata that can collide with other libraries' packaged files.
+        resources {
+            excludes += "META-INF/INDEX.LIST"
+            excludes += "META-INF/*.kotlin_module"
+        }
+    }
 }
 
 dependencies {
@@ -44,6 +52,17 @@ dependencies {
     implementation(libs.androidx.compose.ui.tooling.preview)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
+    implementation(libs.androidx.lifecycle.runtime.compose)
+    implementation(libs.androidx.lifecycle.viewmodel.compose)
+
+    // Pre-built WebRTC native library + Kotlin/Java bindings (org.webrtc.*).
+    // Google no longer publishes org.webrtc:google-webrtc to Maven Central,
+    // so this actively maintained mirror is the standard way to depend on
+    // WebRTC from Android today. Verify this is still the latest stable
+    // version at https://central.sonatype.com/artifact/io.getstream/stream-webrtc-android
+    // before you build, since WebRTC ships new releases frequently.
+    implementation(libs.stream.webrtc.android)
+
     testImplementation(libs.junit)
     androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.compose.ui.test.junit4)
